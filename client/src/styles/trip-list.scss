@@ -1,0 +1,32 @@
+@import "./breakpoints.scss";
+@import "./variables.scss";
+
+
+.title-list {
+    margin: 40px 100px;
+    color: $blue;
+
+    @include sm {
+        margin: 40px 50px;
+        text-align: center;
+    }
+
+    @include lg{
+        text-align: center;
+    }
+}
+
+.list {
+    padding: 0 100px 120px;
+    display: flex;
+    // justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px; 
+
+    @include lg{
+        padding: 0;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}
