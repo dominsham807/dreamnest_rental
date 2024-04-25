@@ -6,7 +6,7 @@
 }
 .dark{
   background-color: #111;
-  color: rgb(156, 156, 156);
+  color: #fff;
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -35,9 +35,9 @@ input::-webkit-inner-spin-button {
   border: 3px solid var(--scroll-bar-bg-color);
 }
 
-@media screen and (max-width: 768px){
+/* @media screen and (max-width: 768px){
   body{
     max-width: 90%;
     margin: 0 auto;
   }
-}
+} */
