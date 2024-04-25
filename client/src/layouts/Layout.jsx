@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import Navbar from './Navbar'
+import Navbar from '../components/Navbar'
 import { Outlet } from 'react-router-dom'
-import Loader from './Loader'
-import Footer from './Footer'
+import Loader from '../components/Loader'
+import Footer from '../components/Footer'
 
 const Layout = () => {
     const [isLoading, setIsLoading] = useState(true)

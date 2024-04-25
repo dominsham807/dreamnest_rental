@@ -57,26 +57,30 @@ const ListingDetails = () => {
 
     const handleSubmit = async() => {
         try{
-            const bookingForm = {
-                customerId,
-                listingId,
-                hostId: listing.creator._id,
-                startDate: format(dateRange[0].startDate, "dd/MM/yyyy"),
-                endDate: format(dateRange[0].endDate, "dd/MM/yyyy"),
-                numOfNights: dayCount,
-                totalPrice: listing.price * dayCount,
-            }
-
-            const response = await fetch("http://localhost:4000/bookings/create", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(bookingForm)
-            })
-            if(response.ok){
-                navigate(`/${customerId}/trips`)
-                toast.success("Booking success")
+            if(customerId){
+                const bookingForm = {
+                    customerId,
+                    listingId,
+                    hostId: listing.creator._id,
+                    startDate: format(dateRange[0].startDate, "dd/MM/yyyy"),
+                    endDate: format(dateRange[0].endDate, "dd/MM/yyyy"),
+                    numOfNights: dayCount,
+                    totalPrice: listing.price * dayCount,
+                }
+    
+                const response = await fetch("http://localhost:4000/bookings/create", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(bookingForm)
+                })
+                if(response.ok){
+                    navigate(`/${customerId}/trips`)
+                    toast.success("Booking success")
+                }
+            } else{
+                toast.error("Please login to proceed booking")
             }
         } catch(error){
             console.log("Failed to book.", error.message)

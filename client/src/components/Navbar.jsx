@@ -2,11 +2,12 @@ import React, { useEffect, useRef, useState } from 'react'
 import { IconButton } from "@mui/material";
 import { Search, Person, Menu } from "@mui/icons-material"
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import variables from "../styles/variables.scss";
 
 import "../styles/navbar.scss"
 import { setLogout } from '../redux/state';
+import toast from 'react-hot-toast';
 
 const Navbar = () => {
     const user = useSelector((state) => state.user) 
@@ -47,10 +48,15 @@ const Navbar = () => {
             </div>
 
             <div className="navbar_right">
-                {user && (
-                    <a href='/create-listing' className='host'>
+                {user?.type === "admin" && (
+                    <>
+                     <a href='/admin/dashboard' className='admin-link'>
+                        Admin Dashboard 
+                    </a>
+                    <a href='/create-listing' className='admin-link'>
                         Become A Host 
                     </a>
+                    </> 
                 )}
                 <div ref={dropdownRef}>
                     <button className="navbar_right_account" onClick={() => setDropdownMenu(!dropdownMenu)}>
@@ -70,11 +76,10 @@ const Navbar = () => {
 
                     <div className={`navbar_right_accountmenu ${dropdownMenu && user ? 'active' : ''}`}>
                         <Link to={`/${user?._id}/trips`} onClick={() => setDropdownMenu(false)}>Trip</Link>
-                        <Link to={`/${user?._id}/wishlist`} onClick={() => setDropdownMenu(false)}>Wishlist</Link>
-                        <Link to={`/${user?._id}/properties`} onClick={() => setDropdownMenu(false)}>Properties</Link>
-                        <Link to={`/${user?._id}/reservations`} onClick={() => setDropdownMenu(false)}>Make Reservations</Link> 
+                        <Link to={`/${user?._id}/wishlist`} onClick={() => setDropdownMenu(false)}>Wishlist</Link>  
                         <Link to={"/login"} onClick={() => {
                             dispatch(setLogout()) 
+                            toast.success("Logout success")
                             setDropdownMenu(false)
                         }}>
                             Logout
